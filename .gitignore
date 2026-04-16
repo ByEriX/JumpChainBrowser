@@ -1,0 +1,78 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+yarn.lock
+pnpm-lock.yaml
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+release/
+out/
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+jumpchain.db
+jumpchain.db-shm
+jumpchain.db-wal
+
+# User-generated content
+thumbnails/
+downloads/
+*.pdf
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.cursor/
+Thumbs.db
+
+# Electron
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Electron-builder
+app/dist/
+dist_electron/
+
+# Vite
+.vite/
