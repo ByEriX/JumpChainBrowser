@@ -1,14 +1,14 @@
 import http from 'http';
 import { randomBytes } from 'crypto';
 import { google } from 'googleapis';
-import type { OAuth2Client } from 'google-auth-library';
-import type { Credentials } from 'google-auth-library';
 import { DatabaseManager } from '../db/database';
 
 const OAUTH_TOKENS_KEY = 'googleOAuthTokens';
 
 const DRIVE_READONLY_SCOPE = 'https://www.googleapis.com/auth/drive.readonly';
 const DEFAULT_REDIRECT_URI = 'http://localhost:53682/oauth2callback';
+type OAuth2Client = InstanceType<typeof google.auth.OAuth2>;
+type OAuthCredentials = Parameters<OAuth2Client['setCredentials']>[0];
 
 interface AuthStatus {
   configured: boolean;
@@ -183,7 +183,7 @@ export class OAuthService {
     client.setCredentials(credentials);
 
     client.on('tokens', (tokens) => {
-      const merged: Credentials = { ...client.credentials, ...tokens };
+      const merged: OAuthCredentials = { ...client.credentials, ...tokens };
       this.saveCredentials(merged);
     });
 
@@ -217,20 +217,20 @@ export class OAuthService {
     return process.env.OAUTH_REDIRECT_URI || DEFAULT_REDIRECT_URI;
   }
 
-  private loadCredentials(): Credentials | null {
+  private loadCredentials(): OAuthCredentials | null {
     const raw = this.db.getSetting(OAUTH_TOKENS_KEY);
     if (!raw) {
       return null;
     }
 
     try {
-      return JSON.parse(raw) as Credentials;
+      return JSON.parse(raw) as OAuthCredentials;
     } catch {
       return null;
     }
   }
 
-  private saveCredentials(credentials: Credentials): void {
+  private saveCredentials(credentials: OAuthCredentials): void {
     this.db.setSetting(OAUTH_TOKENS_KEY, JSON.stringify(credentials));
   }
 }
