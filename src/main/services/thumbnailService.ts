@@ -2,8 +2,8 @@ import path from 'path';
 import fs from 'fs/promises';
 import { app } from 'electron';
 import { google, drive_v3 } from 'googleapis';
-import type { OAuth2Client } from 'google-auth-library';
 import { DatabaseManager } from '../db/database';
+type OAuth2Client = InstanceType<typeof google.auth.OAuth2>;
 
 export class ThumbnailService {
   private db: DatabaseManager;

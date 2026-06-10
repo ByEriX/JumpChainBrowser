@@ -1,6 +1,6 @@
 import { google, drive_v3 } from 'googleapis';
-import type { OAuth2Client } from 'google-auth-library';
 import { DatabaseManager } from '../db/database';
+type OAuth2Client = InstanceType<typeof google.auth.OAuth2>;
 
 interface KnownDriveDefinition {
   urlOrId: string;
